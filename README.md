@@ -4,6 +4,11 @@ A secure and scalable RESTful API for managing tasks, built using **Node.js, Exp
 
 ---
 
+# Postman link 
+https://aditi-6303954.postman.co/workspace/Task-Manager~a61acf8a-0387-49de-aa6a-f2e276459896/collection/43486740-07a8538a-c1ac-4944-9cdb-488f1d63342a?action=share&source=copy-link&creator=43486740
+
+---
+
 ## 🛠 Tech Stack
 
 * **Node.js / Express.js**
