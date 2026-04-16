@@ -1,75 +1,254 @@
-# Task Manager API
+# 🚀 Task Manager API
 
-A RESTful API for task management built with Node.js, Express, PostgreSQL, and MongoDB.
+A secure and scalable RESTful API for managing tasks, built using **Node.js, Express, PostgreSQL, and MongoDB**.
 
-## Tech Stack
-- Node.js / Express.js
-- PostgreSQL (users) via Sequelize ORM
-- MongoDB (tasks) via Mongoose ODM
-- JWT Authentication
-- Bcrypt password hashing
-- Joi validation
+---
 
-## Setup Instructions
+## 🛠 Tech Stack
 
-### Prerequisites
-- Node.js v18+
-- PostgreSQL running locally
-- MongoDB running locally
+* **Node.js / Express.js**
+* **PostgreSQL** (User data via Sequelize ORM)
+* **MongoDB** (Task data via Mongoose ODM)
+* **JWT Authentication**
+* **Bcrypt** (Password hashing)
+* **Joi** (Validation)
 
-### Installation
+---
 
-1. Clone the repo:
-   git clone <your-repo-url>
-   cd task-manager-api
+## ⚙️ Setup Instructions
 
-2. Install dependencies:
-   npm install
+### 📌 Prerequisites
 
-3. Create a `.env` file (see `.env.example`):
-   cp .env.example .env
-   # Fill in your values
+* Node.js (v18+)
+* PostgreSQL (running locally)
+* MongoDB (running locally)
 
-4. Create PostgreSQL database:
-   createdb taskmanager
+---
 
-5. Start the server:
-   npm run dev
+### 📥 Installation
 
-## API Documentation
+```bash
+git clone <your-repo-link>
+cd task-manager-api
+npm install
+```
 
-### Auth Endpoints
+---
 
-**POST /api/auth/register**
-Body: { "email": "user@example.com", "password": "password123" }
-Response: { "status": "success", "data": { "id": 1, "email": "..." } }
+### 🔐 Environment Variables
 
-**POST /api/auth/login**
-Body: { "email": "user@example.com", "password": "password123" }
-Response: { "status": "success", "data": { "token": "jwt_token_here" } }
+Create a `.env` file:
 
-**GET /api/auth/profile** [Protected]
-Header: Authorization: Bearer <token>
-Response: { "status": "success", "data": { "id": 1, "email": "..." } }
+```env
+PORT=3000
 
-### Task Endpoints (all require Authorization header)
+# PostgreSQL
+DB_NAME=taskmanager
+DB_USER=postgres
+DB_PASSWORD=yourpassword
+DB_HOST=localhost
 
-**POST /api/tasks**
-Body: { "title": "Task", "description": "...", "dueDate": "2025-12-31", "status": "pending" }
+# MongoDB
+MONGO_URI=mongodb://127.0.0.1:27017/taskmanager
 
-**GET /api/tasks** — Get all tasks for logged-in user
+# JWT
+JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=1d
+```
 
-**GET /api/tasks/:id** — Get single task by ID
+---
 
-**PATCH /api/tasks/:id** — Update task (any field, partial updates allowed)
-Body: { "status": "completed" }
+### 🗄 Database Setup
 
-**DELETE /api/tasks/:id** — Delete task
+```bash
+createdb taskmanager
+```
 
-## Folder Structure
-- src/config     → Database connection files
-- src/controllers → Business logic
-- src/middleware  → Auth, validation, error handling
-- src/models      → Sequelize (User) and Mongoose (Task) models
-- src/routes      → Express route definitions
-- src/validators  → Joi schemas
+---
+
+### ▶️ Run Server
+
+```bash
+npm run dev
+```
+
+Server runs at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 📡 API Documentation
+
+---
+
+### 🔐 Auth Endpoints
+
+#### ➤ Register
+
+```
+POST /api/auth/register
+```
+
+Body:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+---
+
+#### ➤ Login
+
+```
+POST /api/auth/login
+```
+
+Response:
+
+```json
+{
+  "status": "success",
+  "data": {
+    "token": "jwt_token"
+  }
+}
+```
+
+---
+
+#### ➤ Get Profile (Protected)
+
+```
+GET /api/auth/profile
+```
+
+Header:
+
+```
+Authorization: Bearer <token>
+```
+
+---
+
+### 📝 Task Endpoints (Protected)
+
+#### ➤ Create Task
+
+```
+POST /api/tasks
+```
+
+```json
+{
+  "title": "Task",
+  "description": "Test task",
+  "dueDate": "2025-12-31",
+  "status": "pending"
+}
+```
+
+---
+
+#### ➤ Get All Tasks
+
+```
+GET /api/tasks
+```
+
+---
+
+#### ➤ Get Task by ID
+
+```
+GET /api/tasks/:id
+```
+
+---
+
+#### ➤ Update Task
+
+```
+PATCH /api/tasks/:id
+```
+
+```json
+{
+  "status": "completed"
+}
+```
+
+---
+
+#### ➤ Delete Task
+
+```
+DELETE /api/tasks/:id
+```
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+│
+├── config/        # Database connections
+├── controllers/   # Business logic
+├── middleware/    # Auth, validation, error handling
+├── models/        # Sequelize & Mongoose models
+├── routes/        # API routes
+├── validators/    # Joi schemas
+```
+
+---
+
+## 🧠 Design Decisions
+
+* **Hybrid DB Architecture**
+
+  * PostgreSQL → structured user data
+  * MongoDB → flexible task data
+
+* **JWT Authentication**
+
+  * Stateless and scalable
+
+* **Middleware-based architecture**
+
+  * Clean separation of concerns
+
+* **Validation Layer (Joi)**
+
+  * Prevents invalid data early
+
+---
+
+## ⚠️ Error Handling
+
+* Centralized error handler
+* Proper HTTP status codes
+* Validation error messages returned clearly
+
+---
+
+## 🔒 Security
+
+* Passwords hashed using bcrypt
+* JWT-based authentication
+* Helmet for HTTP security
+* CORS enabled
+
+---
+
+## 📌 Notes
+
+* All task routes require authentication
+* Users can only access their own tasks
+
+---
