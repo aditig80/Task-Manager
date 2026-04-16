@@ -251,6 +251,14 @@ src/
 
 ---
 
+## 🚀 Future Improvements
+- Swagger API documentation
+- Role-based access control
+- Pagination & filtering
+- Docker deployment
+
+---  
+
 ## 📌 Notes
 
 * All task routes require authentication
